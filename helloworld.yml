@@ -1,15 +1,19 @@
----
-- name: Hello World!
-  hosts: all
- 
-  tasks:
- 
-  - name: Hello World!
-    - shell: echo "Hi! Tower is working. "
-      register: hello
+# Example that prints the loopback address and gateway for each host
+- debug:
+    msg: "System {{ inventory_hostname }} has uuid {{ ansible_product_uuid }}"
 
-    - name: Debug hello
-      "{{ hello.stdout }}"
+- debug:
+    msg: "System {{ inventory_hostname }} has gateway {{ ansible_default_ipv4.gateway }}"
+  when: ansible_default_ipv4.gateway is defined
 
-    - name: Debug hello
-      "{{ hello.stderr }}"
+- shell: /usr/bin/uptime
+  register: result
+
+- debug:
+    var: result
+    verbosity: 2
+
+- name: Display all variables/facts known for a host
+  debug:
+    var: hostvars[inventory_hostname]
+    verbosity: 4
