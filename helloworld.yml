@@ -8,6 +8,8 @@
     shell: echo "Hi! Tower is working. "
     register: hello
 
-- debug: msg="{{ hello.stdout }}"
+- name: Debug hello
+  - debug: msg="{{ hello.stdout }}"
 
-- debug: msg="{{ hello.stderr }}"
+- name: Debug hello
+  - debug: msg="{{ hello.stderr }}"
