@@ -9,7 +9,7 @@
     register: hello
 
 - name: Debug hello
-  - debug: {{ hello.stdout }}
+  - {{ hello.stdout }}
 
 - name: Debug hello
-  - debug: {{ hello.stderr }}
+  - {{ hello.stderr }}
