@@ -6,3 +6,8 @@
  
   - name: Hello World!
     shell: echo "Hi! Tower is working. "
+    register: hello
+
+- debug: msg="{{ hello.stdout }}"
+
+- debug: msg="{{ hello.stderr }}"
