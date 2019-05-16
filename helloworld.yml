@@ -1,19 +1,26 @@
-# Example that prints the loopback address and gateway for each host
-- debug:
-    msg: "System {{ inventory_hostname }} has uuid {{ ansible_product_uuid }}"
+---
+- hosts: webservers
+  remote_user: root
 
-- debug:
-    msg: "System {{ inventory_hostname }} has gateway {{ ansible_default_ipv4.gateway }}"
-  when: ansible_default_ipv4.gateway is defined
+  tasks:
+  - name: ensure apache is at the latest version
+    yum:
+      name: httpd
+      state: latest
+  - name: write the apache config file
+    template:
+      src: /srv/httpd.j2
+      dest: /etc/httpd.conf
 
-- shell: /usr/bin/uptime
-  register: result
+- hosts: databases
+  remote_user: root
 
-- debug:
-    var: result
-    verbosity: 2
-
-- name: Display all variables/facts known for a host
-  debug:
-    var: hostvars[inventory_hostname]
-    verbosity: 4
+  tasks:
+  - name: ensure postgresql is at the latest version
+    yum:
+      name: postgresql
+      state: latest
+  - name: ensure that postgresql is started
+    service:
+      name: postgresql
+      state: started
