@@ -1,6 +1,11 @@
 ---
+- hosts: switches
+  connection: local
 
-- hosts: all
-  gather_facts: false
   tasks:
-    - ping:
+    - name: Show VLAN
+      ios_command:
+        commands: show vlan brief
+      register: show_vlan
+
+    - debug: var=show_vlan.stdout_lines
