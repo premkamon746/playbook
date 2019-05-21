@@ -1,5 +1,5 @@
 ---
-- hosts: http://127.0.0.1:5000
+- hosts: 127.0.0.1:5000
   connection: local
 
   tasks:
