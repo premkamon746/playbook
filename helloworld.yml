@@ -2,7 +2,6 @@
 - name: IOS Show Commands
   hosts: "172.21.0.1:5001"
   gather_facts: false
-  connection: local
 
   vars:
     cli:
