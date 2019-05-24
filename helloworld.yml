@@ -1,6 +1,6 @@
 ---
 - name: IOS Show Commands
-  hosts: "ios_devices"
+  hosts: "172.21.0.1:5001"
   gather_facts: false
   connection: local
 
